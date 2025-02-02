@@ -49,6 +49,13 @@ class _CalculatorState extends State<Calculator> {
           _expression = _expression.substring(0, _expression.length - 1);
           output = _expression.isEmpty ? '0' : _expression;
         }
+      } else if (buttonText == '+/-') {
+        // Handle +/- functionality (toggle sign)
+        if (output.startsWith('-')) {
+          output = output.substring(1); // Remove negative sign
+        } else {
+          output = '-' + output; // Add negative sign
+        }
       } else {
         _expression += buttonText;
         output = _expression;
@@ -76,10 +83,10 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 124, 124, 124),
         title: const Text('iOS Calculator'),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 124, 124, 124),
       body: Column(
         children: <Widget>[
           // Display result/output at the top
@@ -91,7 +98,7 @@ class _CalculatorState extends State<Calculator> {
                 output,
                 style: const TextStyle(
                   fontSize: 48,
-                  color: Colors.white,
+                  color: Colors.black,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -100,41 +107,42 @@ class _CalculatorState extends State<Calculator> {
           // Calculator button layout
           Row(
             children: <Widget>[
-              _buildButton('C', Colors.red),
-              _buildButton('DEL', Colors.grey),
-              _buildButton('%', Colors.orange),
-              _buildButton('/', Colors.orange),
+              _buildButton('C', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('%', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('/', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('x', const Color.fromARGB(255, 194, 194, 194)),
             ],
           ),
           Row(
             children: <Widget>[
-              _buildButton('7', Colors.grey),
-              _buildButton('8', Colors.grey),
-              _buildButton('9', Colors.grey),
-              _buildButton('x', Colors.orange),
+              _buildButton('7', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('8', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('9', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('-', const Color.fromARGB(255, 194, 194, 194)),
             ],
           ),
           Row(
             children: <Widget>[
-              _buildButton('4', Colors.grey),
-              _buildButton('5', Colors.grey),
-              _buildButton('6', Colors.grey),
-              _buildButton('-', Colors.orange),
+              _buildButton('4', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('5', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('6', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('+', const Color.fromARGB(255, 194, 194, 194)),
             ],
           ),
           Row(
             children: <Widget>[
-              _buildButton('1', Colors.grey),
-              _buildButton('2', Colors.grey),
-              _buildButton('3', Colors.grey),
-              _buildButton('+', Colors.orange),
+              _buildButton('1', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('2', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('3', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('DEL', const Color.fromARGB(255, 194, 194, 194)),
             ],
           ),
           Row(
             children: <Widget>[
-              _buildButton('0', Colors.grey),
-              _buildButton('.', Colors.grey),
-              _buildButton('=', Colors.green),
+              _buildButton('0', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('.', const Color.fromARGB(255, 194, 194, 194)),
+              _buildButton('+/-', const Color.fromARGB(255, 194, 194, 194)),  // Added +/- button here
+              _buildButton('=', const Color.fromARGB(255, 194, 194, 194)),
             ],
           ),
         ],
@@ -151,16 +159,14 @@ class _CalculatorState extends State<Calculator> {
           onPressed: () => buttonPressed(buttonText),
           style: ElevatedButton.styleFrom(
             backgroundColor: color,
-            padding: const EdgeInsets.all(20),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
+            padding: const EdgeInsets.all(40),
+            shape: CircleBorder(),  // Use CircleBorder for a circular button
           ),
           child: Text(
             buttonText,
             style: const TextStyle(
               fontSize: 28,
-              color: Colors.white,
+              color: Colors.black,
             ),
           ),
         ),
